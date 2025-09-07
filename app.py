@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import requests
+import gdown
 import time
 
 API_KEY = "e0f75588cfc093e37d64ad3851a696ad"
@@ -34,9 +35,30 @@ def fetch_poster(movie_id, title):
     # Final fallback: placeholder
     return "https://via.placeholder.com/500x750?text=No+Poster"
 
+# ---------------- Load similarity.pkl from Google Drive ----------------
+SIMILARITY_URL = "https://drive.google.com/uc?id=14tlswXt4BiGHE7RhhRvpfRIGxDVRt4OE"
+
+@st.cache_data
+def load_similarity(url):
+    output = "similarity.pkl"
+    gdown.download(url, output, quiet=True)
+    with open(output, "rb") as f:
+        similarity = pickle.load(f)
+    return similarity
+
+similarity = load_similarity(SIMILARITY_URL)
+
+# ---------------- Load local movie_dict.pkl ----------------
+movies = pd.DataFrame(pickle.load(open('movie_dict.pkl','rb')))
+
 # ---------------- Recommendation function ----------------
 def recommend(movie):
-    idx = movies[movies['title'] == movie].index[0]
+    try:
+        idx = movies[movies['title'] == movie].index[0]
+    except IndexError:
+        st.warning("Movie not found!")
+        return [], []
+
     distances = similarity[idx]
     top_indices = sorted(list(enumerate(distances)), key=lambda x: x[1], reverse=True)[1:6]
 
@@ -46,11 +68,7 @@ def recommend(movie):
 
     return recommended_titles, recommended_posters
 
-# ---------------- Load data ----------------
-movies = pd.DataFrame(pickle.load(open('movie_dict.pkl','rb')))
-similarity = pickle.load(open('similarity.pkl','rb'))
-
-# ------------------ Streamlit App ------------------
+# ---------------- Streamlit App ------------------
 st.title("🎬 Movie Recommendation System")
 
 selected_movie_name = st.selectbox("Select a movie:", movies['title'].values)
@@ -58,7 +76,8 @@ selected_movie_name = st.selectbox("Select a movie:", movies['title'].values)
 if st.button('Recommend'):
     names, posters = recommend(selected_movie_name)
     
-    cols = st.columns(5)
-    for col, name, poster in zip(cols, names, posters):
-        col.text(name[:30])  # truncate long titles
-        col.image(poster)
+    if names:
+        cols = st.columns(5)
+        for col, name, poster in zip(cols, names, posters):
+            col.text(name[:30])  # truncate long titles
+            col.image(poster)
