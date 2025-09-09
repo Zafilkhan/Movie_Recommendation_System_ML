@@ -36,8 +36,8 @@ It suggests similar movies based on the movie you select.
 ## ▶️ How to Run Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/movie-recommendation-system.git
-   cd movie-recommendation-system
+   git clone https://github.com/Zafilkhan/Movie_Recommendation_System_ML.git
+   cd Movie_Recommendation_System_ML
 ### 2.Install dependencies:   
   - pip install -r requirements.txt
 ### 3.Run the Streamlit app:
@@ -45,7 +45,7 @@ It suggests similar movies based on the movie you select.
 
 
 
- ### API Key
+ ## API Key
 This project uses the TMDB API for fetching posters.
 Add your TMDB API key in Streamlit secrets:
 - Streamlit Cloud Secrets (Settings → Secrets)
@@ -53,7 +53,7 @@ Add your TMDB API key in Streamlit secrets:
 
 ### Author
 - Zafil Khan
-  - Feel free to contribute or raise issues! ⭐
+ - Feel free to contribute or raise issues! ⭐
 
 
 
