@@ -48,12 +48,12 @@ It suggests similar movies based on the movie you select.
  ### API Key
 This project uses the TMDB API for fetching posters.
 Add your TMDB API key in Streamlit secrets:
-# Streamlit Cloud Secrets (Settings → Secrets)
-API_KEY = "e0f75588cfc093e37d64ad3851a696ad"
+- Streamlit Cloud Secrets (Settings → Secrets)
+- API_KEY = "e0f75588cfc093e37d64ad3851a696ad"
 
 ### Author
 - Zafil Khan
-  Feel free to contribute or raise issues! ⭐
+  - Feel free to contribute or raise issues! ⭐
 
 
 
