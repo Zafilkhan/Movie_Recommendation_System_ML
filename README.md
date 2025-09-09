@@ -38,21 +38,21 @@ It suggests similar movies based on the movie you select.
    ```bash
    git clone https://github.com/your-username/movie-recommendation-system.git
    cd movie-recommendation-system
-2.Install dependencies:   
-pip install -r requirements.txt
+# 2.Install dependencies:   
+  # pip install -r requirements.txt
 3.Run the Streamlit app:
   streamlit run app.py
 
 
 
-  API Key
+ ## API Key
 This project uses the TMDB API for fetching posters.
 Add your TMDB API key in Streamlit secrets:
 # Streamlit Cloud Secrets (Settings → Secrets)
 API_KEY = "e0f75588cfc093e37d64ad3851a696ad"
 
 Author
-Zafil Khan
+## Zafil Khan
 Feel free to contribute or raise issues! ⭐
 
 
